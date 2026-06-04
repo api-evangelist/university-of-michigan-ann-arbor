@@ -1,0 +1,68 @@
+{
+  "@context": {
+    "@vocab": "https://schema.org/",
+    "umich": "https://umich.edu/ns#",
+    "schema": "https://schema.org/",
+    "dcterms": "http://purl.org/dc/terms/",
+    "oai": "http://www.openarchives.org/OAI/2.0/",
+
+    "CollegeOrUniversity": "schema:CollegeOrUniversity",
+    "name": "schema:name",
+    "alternateName": "schema:alternateName",
+    "url": "schema:url",
+    "description": "schema:description",
+    "logo": "schema:logo",
+    "sameAs": "schema:sameAs",
+    "department": "schema:department",
+    "parentOrganization": "schema:parentOrganization",
+
+    "Dataset": "schema:Dataset",
+    "DataCatalog": "schema:DataCatalog",
+    "Collection": "schema:Collection",
+    "CreativeWork": "schema:CreativeWork",
+
+    "identifier": "schema:identifier",
+    "doi": {
+      "@id": "datacite:doi",
+      "@type": "@id"
+    },
+    "title": "dcterms:title",
+    "creator": "dcterms:creator",
+    "publisher": "dcterms:publisher",
+    "datePublished": "schema:datePublished",
+    "dateModified": "schema:dateModified",
+    "license": "schema:license",
+    "keywords": "schema:keywords",
+    "distribution": "schema:distribution",
+    "contentUrl": "schema:contentUrl",
+    "encodingFormat": "schema:encodingFormat",
+
+    "oaiIdentifier": "oai:identifier",
+    "datestamp": "oai:datestamp",
+    "setSpec": "oai:setSpec",
+    "metadataPrefix": "oai:metadataPrefix"
+  },
+  "@type": "CollegeOrUniversity",
+  "name": "University of Michigan-Ann Arbor",
+  "alternateName": "U-M",
+  "url": "https://umich.edu",
+  "description": "Public research university whose developer and API footprint includes the U-M ITS API Directory (Apigee X), the Deep Blue Data REST API, and the Deep Blue Documents OAI-PMH metadata endpoint operated by the University of Michigan Library.",
+  "sameAs": [
+    "https://www.lib.umich.edu",
+    "https://github.com/umich",
+    "https://github.com/mlibrary",
+    "https://www.linkedin.com/school/university-of-michigan/"
+  ],
+  "department": [
+    {
+      "@type": "Organization",
+      "name": "U-M Information and Technology Services",
+      "url": "https://its.umich.edu"
+    },
+    {
+      "@type": "Organization",
+      "name": "University of Michigan Library",
+      "url": "https://www.lib.umich.edu"
+    }
+  ]
+}

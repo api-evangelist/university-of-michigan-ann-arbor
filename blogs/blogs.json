@@ -1,0 +1,21 @@
+{
+  "repo": "university-of-michigan-ann-arbor",
+  "feeds": [
+    {
+      "source": "https://www.lib.umich.edu/about-us/news",
+      "feed_url": "https://www.lib.umich.edu/about-us/news",
+      "title": "University of Michigan Library News",
+      "saved": 0,
+      "method": "none"
+    },
+    {
+      "source": "https://its.umich.edu/news",
+      "feed_url": "https://its.umich.edu/news",
+      "title": "U-M Information and Technology Services News",
+      "saved": 0,
+      "method": "none"
+    }
+  ],
+  "post_count": 0,
+  "fetched": "2026-06-03T00:00:00Z"
+}

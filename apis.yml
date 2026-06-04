@@ -103,6 +103,10 @@ common:
     url: finops/university-of-michigan-ann-arbor-finops.yml
   - type: Review
     url: review.yml
+  - type: JSONLD
+    url: json-ld/university-of-michigan-ann-arbor-context.jsonld
+  - type: Blog
+    url: blogs/blogs.json
 maintainers:
   - FN: Kin Lane
     email: kin@apievangelist.com
