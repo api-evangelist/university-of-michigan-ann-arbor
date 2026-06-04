@@ -1,0 +1,49 @@
+---
+name: University of Michigan-Ann Arbor
+description: University of Michigan-Ann Arbor public developer/API footprint review for APIs.json cataloging.
+url: https://raw.githubusercontent.com/api-evangelist/university-of-michigan-ann-arbor/refs/heads/main/review.yml
+created: '2026-06-03'
+modified: '2026-06-03'
+reviews:
+  - date: '2026-06-03'
+    rating: 3
+    summary: >-
+      U-M has a substantial but mostly gated API program. The ITS API Directory
+      runs on Apigee X and requires a U-M uniqname, Duo two-factor, and
+      campus-network/VPN access, so its endpoints could not be probed
+      anonymously. The strongest verifiable public surface is library
+      infrastructure: the Deep Blue Documents DSpace OAI-PMH endpoint resolved
+      live (HTTP 200) with a valid Identify response, and Deep Blue Data
+      documents a public REST API. GitHub orgs @umich and @mlibrary were
+      confirmed via the GitHub API. Several umich.edu pages return 403 to
+      automated agents (Akamai bot protection) but are real, publicly
+      documented pages. No endpoints were fabricated; ratings reflect that most
+      enterprise APIs are member-only.
+    endpoints:
+      - url: https://backend.production.deepblue-documents.lib.umich.edu/server/oai/request?verb=Identify
+        status: 200
+        note: Live DSpace OAI-PMH endpoint, valid Identify XML returned (repositoryName Deep Blue).
+      - url: https://www.lib.umich.edu
+        status: 200
+        note: U-M Library public website, live.
+      - url: https://github.com/umich
+        status: 200
+        note: Official University of Michigan GitHub org, verified via GitHub API.
+      - url: https://github.com/mlibrary
+        status: 200
+        note: U-M Library GitHub org, 398 public repos via GitHub API.
+      - url: https://deepblue.lib.umich.edu/data/rest-api
+        status: 403
+        note: Deep Blue Data REST API docs; 403 to bots (Akamai) but publicly documented and search-confirmed.
+      - url: https://its.umich.edu/data/data-database/api-directory
+        status: 403
+        note: ITS API Directory portal (Apigee X, gated). 403 to bots; real page, gated to U-M members.
+      - url: https://documentation.its.umich.edu/api-directory
+        status: 403
+        note: ITS API Directory documentation; 403 to bots, real public docs site.
+      - url: https://umich.edu
+        status: 403
+        note: Official university website; 403 to automated agents, live in browser.
+      - url: https://www.linkedin.com/school/university-of-michigan/
+        status: 999
+        note: LinkedIn school page; 999 is LinkedIn's standard anti-bot response, page exists.
