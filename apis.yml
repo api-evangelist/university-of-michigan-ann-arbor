@@ -81,6 +81,8 @@ apis:
       - type: Documentation
         url: https://www.lib.umich.edu/collections/deep-blue-repositories
 common:
+  - type: DomainSecurity
+    url: security/university-of-michigan-ann-arbor-domain-security.yml
   - type: Website
     url: https://umich.edu
   - type: Website
