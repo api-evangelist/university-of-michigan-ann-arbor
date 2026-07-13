@@ -5,8 +5,9 @@
       "source": "https://www.lib.umich.edu/about-us/news",
       "feed_url": "https://www.lib.umich.edu/about-us/news",
       "title": "University of Michigan Library News",
-      "saved": 1,
-      "method": "html-scrape"
+      "saved": 0,
+      "method": "html-scrape",
+      "error": "parse_failed"
     },
     {
       "source": "https://its.umich.edu/news",
@@ -14,9 +15,10 @@
       "title": "U-M Information and Technology Services News",
       "saved": 0,
       "method": "none",
-      "note": "All feed paths and HTML return HTTP 403 Forbidden"
+      "note": "All feed paths and HTML return HTTP 403 Forbidden",
+      "error": "parse_failed"
     }
   ],
-  "post_count": 1,
-  "fetched": "2026-06-21T17:00:00Z"
+  "post_count": 3,
+  "fetched": "2026-07-11T11:43:46Z"
 }
