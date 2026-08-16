@@ -16,9 +16,9 @@
       "saved": 0,
       "method": "none",
       "note": "All feed paths and HTML return HTTP 403 Forbidden",
-      "error": "parse_failed"
+      "error": "fetch_failed: HTTPError"
     }
   ],
   "post_count": 3,
-  "fetched": "2026-08-06T13:56:59Z"
+  "fetched": "2026-08-15T12:11:08Z"
 }
