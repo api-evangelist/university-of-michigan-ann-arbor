@@ -196,7 +196,18 @@ apis:
       institution-run campus-life surfaces U-M has.
     humanURL: https://mbus.ltp.umich.edu/
     baseURL: https://mbus.ltp.umich.edu/bustime/api/v3
-    tags: [ Transit, Campus Life, Real Time, Gated, BusTime ]
+    tags:
+    - Transit
+    - Campus Life
+    - Real-Time
+    - Gated
+    - BusTime
+    tags_raw:
+    - Transit
+    - Campus Life
+    - Real Time
+    - Gated
+    - BusTime
     properties:
       - type: Documentation
         url: https://mbus.ltp.umich.edu/
