@@ -59,204 +59,207 @@ created: '2026-06-03'
 modified: '2026-08-19'
 specificationVersion: '0.23'
 apis:
-  - aid: university-of-michigan-ann-arbor:deep-blue-documents-oai
-    name: Deep Blue Documents OAI-PMH
-    x-operator: institution
-    x-operator-evidence: >-
-      Host backend.production.deepblue-documents.lib.umich.edu is under umich.edu. Identify
-      returns repositoryName "Deep Blue", repositoryIdentifier "deepblue.lib.umich.edu",
-      adminEmail deepblue@umich.edu. The software is DSpace (open source); the deployment,
-      host, content and administrative contact are the University of Michigan Library's.
-    description: >-
-      Live OAI-PMH 2.0 metadata harvesting endpoint for Deep Blue Documents, the University of
-      Michigan Library's DSpace institutional repository of articles, dissertations, theses and
-      archival collections. All six protocol verbs were probed live on 2026-08-19 and all
-      returned HTTP 200: Identify, ListMetadataFormats (12 prefixes — oai_dc, qdc, mods, mets,
-      marc, rdf, ore, didl, dim, xoai, etdms, uketd_dc), ListSets (726 sets), ListIdentifiers,
-      ListRecords and GetRecord. Unauthenticated and open. Records go back to 2005-08-29.
-      Protocol errors are returned with HTTP 200 inside the envelope — four error codes
-      (badVerb, badArgument, cannotDisseminateFormat, idDoesNotExist) were reproduced against
-      this host. The University of Michigan does not publish an OpenAPI description of this
-      endpoint; the one in this repo was written by API Evangelist from those probes.
-    humanURL: https://www.lib.umich.edu/collections/deep-blue-repositories
-    baseURL: https://backend.production.deepblue-documents.lib.umich.edu/server/oai/request
-    tags: [ OAI-PMH, DSpace, Institutional Repository, Metadata, Library, Research Data ]
-    properties:
-      - type: Documentation
-        url: https://www.lib.umich.edu/collections/deep-blue-repositories
-      - type: OpenAPI
-        url: openapi/university-of-michigan-ann-arbor-deep-blue-documents-oai-pmh-openapi.yml
-      - type: JSONSchema
-        url: json-schema/university-of-michigan-ann-arbor-oai-pmh-schema.json
-      - type: Examples
-        url: examples/deep-blue-documents-oai-identify.xml
-      - type: Vocabulary
-        url: vocabulary/university-of-michigan-ann-arbor-vocabulary.yml
-      - type: ErrorCodes
-        url: errors/university-of-michigan-ann-arbor-errors.yml
-      - type: Rules
-        url: rules/university-of-michigan-ann-arbor-rules.yml
-  - aid: university-of-michigan-ann-arbor:shibboleth-idp
-    name: U-M Shibboleth Identity Provider (InCommon)
-    x-operator: institution
-    x-operator-evidence: >-
-      shibboleth.umich.edu and weblogin.umich.edu are under umich.edu and serve a SAML 2.0
-      EntityDescriptor with entityID https://shibboleth.umich.edu/idp/shibboleth. InCommon's
-      metadata query service returns the same entity with
-      mdrpi:RegistrationInfo registrationAuthority="https://incommon.org".
-    description: >-
-      The University of Michigan's own Shibboleth SAML 2.0 identity provider, and the most
-      unambiguously institution-operated machine-readable surface U-M publishes. GET
-      https://shibboleth.umich.edu/idp/shibboleth returns 200 application/xml (10,923 bytes) —
-      an IDPSSODescriptor with protocolSupportEnumeration urn:oasis:names:tc:SAML:2.0:protocol,
-      signing and encryption key descriptors, SSO and SLO endpoints, and shibmd:Scope entries
-      for umich.edu, annarbor.umich.edu, umd.umich.edu, dearborn.umich.edu and flint.umich.edu.
-      Registered in InCommon and therefore reachable through eduGAIN. U-M ITS Identity and
-      Access Management publishes working SAML and OIDC service-provider integration examples
-      publicly at github.com/umich-iam. This is federation metadata, not a REST API — there is
-      no OpenAPI to write and none has been invented.
-    humanURL: https://its.umich.edu/accounts-access/identity-access-management/
-    baseURL: https://shibboleth.umich.edu/idp/shibboleth
-    tags: [ Identity Federation, SAML, Shibboleth, InCommon, SSO, Identity ]
-    properties:
-      - type: Documentation
-        url: https://its.umich.edu/accounts-access/identity-access-management/
-      - type: Authentication
-        url: authentication/university-of-michigan-ann-arbor-authentication.yml
-      - type: GitHubOrganization
-        url: https://github.com/umich-iam
-      - type: CodeExamples
-        url: https://github.com/umich-iam/SSO-Examples
-  - aid: university-of-michigan-ann-arbor:api-directory
-    name: U-M ITS API Directory
-    x-operator: institution
-    x-operator-evidence: >-
-      its.umich.edu and documentation.its.umich.edu are under umich.edu. Apigee X is the
-      gateway product U-M runs the directory on; the APIs, the data and the directory are U-M's.
-    description: >-
-      Enterprise API directory and gateway operated by U-M Information and Technology Services
-      on Google Apigee X (migrated from IBM API Connect v5 in 2024), exposing institutional data
-      APIs across teaching and learning, research, clinical care, public service and
-      administration — MCommunity directory APIs, Schedule of Classes, class rosters and room
-      scheduling among them. It is closed: browsing, subscribing to or calling anything in it
-      requires a U-M uniqname and password, Duo two-factor authentication, and presence on the
-      U-M network or VPN. No anonymous probe of any endpoint was possible and no API in the
-      directory is described here. The credential shape is visible in U-M Library's own
-      open-source client, mlibrary/class_api_requester, which is constructed with an API id, an
-      API secret, an API URL and a separate token URL.
-    humanURL: https://its.umich.edu/data/data-database/api-directory
-    tags: [ API Directory, Apigee, Identity, Institutional Data, Gated, Course Catalog ]
-    properties:
-      - type: Documentation
-        url: https://its.umich.edu/data/data-database/api-directory
-      - type: Documentation
-        url: https://documentation.its.umich.edu/api-directory
-      - type: GettingStarted
-        url: https://its.umich.edu/data/data-database/api-directory/getting-started
-      - type: Support
-        url: https://its.umich.edu/data/data-database/api-directory/support
-      - type: CodeExamples
-        url: https://github.com/mlibrary/class_api_requester
-  - aid: university-of-michigan-ann-arbor:deep-blue-data
-    name: Deep Blue Data REST API
-    x-operator: institution
-    x-operator-evidence: >-
-      deepblue.lib.umich.edu is under umich.edu. The repository is Hyrax/Samvera software run by
-      the University of Michigan Library; the DOIs are minted under the U-M Library DataCite
-      membership (symbol UMICH).
-    description: >-
-      Public REST API for Deep Blue Data, the University of Michigan Library's open repository
-      for research datasets produced by U-M researchers, with DataCite DOI persistent
-      identifiers. Documented publicly at deepblue.lib.umich.edu/data/rest-api. Could not be
-      described here: every request to deepblue.lib.umich.edu from an automated client —
-      including the documentation page and /data/api/v1/works — returns a Cloudflare managed
-      challenge (HTTP 403, body "Just a moment..."). That is a limit on our probing, not a
-      finding about the API. No paths, parameters or schemas have been guessed; no OpenAPI is
-      emitted for this surface until it can actually be read.
-    humanURL: https://deepblue.lib.umich.edu/data/rest-api
-    baseURL: https://deepblue.lib.umich.edu/data
-    tags: [ Research Data, Repository, REST, Open Data, Library, DataCite ]
-    properties:
-      - type: Documentation
-        url: https://deepblue.lib.umich.edu/data/rest-api
-  - aid: university-of-michigan-ann-arbor:magic-bus
-    name: Magic Bus (U-M Transit) BusTime API
-    x-operator: institution
-    x-operator-evidence: >-
-      mbus.ltp.umich.edu is under umich.edu and is run by U-M Logistics, Transportation and
-      Parking. The BusTime software is Clever Devices' product; the deployment, the routes and
-      the vehicle data are U-M's. Clever Devices' generic contract is not stored here.
-    description: >-
-      Real-time campus transit API for U-M's Magic Bus service, served from a U-M host on
-      Clever Devices BusTime. Live and gated by an API access key — GET
-      /bustime/api/v3/getroutes and /bustime/api/v3/gettime both returned HTTP 200 text/xml with
-      "<bustime-response><error><msg>No API access key supplied</msg></error></bustime-response>"
-      on 2026-08-19. No public self-service key issuance page was found. The rider-facing app at
-      the root is an Angular single-page application. One of the few genuinely small,
-      institution-run campus-life surfaces U-M has.
-    humanURL: https://mbus.ltp.umich.edu/
-    baseURL: https://mbus.ltp.umich.edu/bustime/api/v3
-    tags:
-    - Transit
-    - Campus Life
-    - Real-Time
-    - Gated
-    - BusTime
-    tags_raw:
-    - Transit
-    - Campus Life
-    - Real Time
-    - Gated
-    - BusTime
-    properties:
-      - type: Documentation
-        url: https://mbus.ltp.umich.edu/
-  - aid: university-of-michigan-ann-arbor:materials-commons
-    name: Materials Commons
-    x-operator: institution
-    x-operator-evidence: >-
-      Not on umich.edu — materialscommons.org is a project domain. Institutional ownership is
-      evidenced instead: the site states it is operated as part of the PRISMS Center at the
-      University of Michigan under DOE award DE-SC0008637, its API documentation is copyright
-      PRISMS Center, and its DOI-minting repository UMICH.MC is registered under the University
-      of Michigan Library's DataCite provider account. This is a U-M research project on its
-      own domain, not a tenancy on a vendor platform.
-    description: >-
-      Materials-science data repository for storing, sharing and publishing research datasets
-      and workflows, operated by the PRISMS Center at the University of Michigan. It advertises
-      a CLI and an API, but the only published API documentation is a Sphinx reference for the
-      materials_commons.api Python package (version 2.0b5, copyright 2021, PRISMS Center) —
-      there is no HTTP contract, no OpenAPI and no path reference. Nothing has been derived from
-      the SDK docs, because a Python client is not a description of the wire protocol.
-    humanURL: https://materialscommons.org/
-    tags: [ Research Data, Repository, Materials Science, SDK, DataCite ]
-    properties:
-      - type: Documentation
-        url: https://materials-commons.github.io/materials-commons-api/html/index.html
-      - type: Website
-        url: https://materialscommons.org/
-  - aid: university-of-michigan-ann-arbor:canvas-lms
-    name: Canvas LMS (U-M tenancy on Instructure)
-    x-operator: tenant
-    x-operator-evidence: >-
-      umich.instructure.com is a U-M-specific account on Instructure's platform, not a U-M
-      host. GET /api/v1/accounts returns 401 with Canvas's own error envelope
-      ({"status":"unauthenticated"}) and /login returns 200 titled "U-M Canvas Login". A
-      nonsense tenant on the same platform (zzznotarealtenant.instructure.com) returns 404, so
-      the U-M tenancy is real and not a wildcard artefact.
-    description: >-
-      The University of Michigan's Canvas learning management system tenancy. The courses, the
-      enrollments and the data are U-M's; the API contract is Instructure's, published once for
-      every Canvas customer, and it is deliberately NOT stored in this repo. This entry records
-      the relationship — which is a real institutional fact and one of U-M's few programmable
-      surfaces — without crediting U-M with Instructure's engineering. Score the contract
-      against Instructure.
-    humanURL: https://umich.instructure.com/login
-    baseURL: https://umich.instructure.com/api/v1
-    tags: [ LMS, Canvas, Tenant, Teaching and Learning, Vendor Platform ]
-    properties:
-      - type: Documentation
-        url: https://umich.instructure.com/login
+- aid: university-of-michigan-ann-arbor:shibboleth-idp
+  name: U-M Shibboleth Identity Provider (InCommon)
+  x-operator: institution
+  x-operator-evidence: >-
+    shibboleth.umich.edu and weblogin.umich.edu are under umich.edu and serve a SAML 2.0 EntityDescriptor
+    with entityID https://shibboleth.umich.edu/idp/shibboleth. InCommon's metadata query service returns
+    the same entity with mdrpi:RegistrationInfo registrationAuthority="https://incommon.org".
+  description: >-
+    The University of Michigan's own Shibboleth SAML 2.0 identity provider, and the most unambiguously
+    institution-operated machine-readable surface U-M publishes. GET https://shibboleth.umich.edu/idp/shibboleth
+    returns 200 application/xml (10,923 bytes) — an IDPSSODescriptor with protocolSupportEnumeration urn:oasis:names:tc:SAML:2.0:protocol,
+    signing and encryption key descriptors, SSO and SLO endpoints, and shibmd:Scope entries for umich.edu,
+    annarbor.umich.edu, umd.umich.edu, dearborn.umich.edu and flint.umich.edu. Registered in InCommon
+    and therefore reachable through eduGAIN. U-M ITS Identity and Access Management publishes working
+    SAML and OIDC service-provider integration examples publicly at github.com/umich-iam. This is federation
+    metadata, not a REST API — there is no OpenAPI to write and none has been invented.
+  humanURL: https://its.umich.edu/accounts-access/identity-access-management/
+  baseURL: https://shibboleth.umich.edu/idp/shibboleth
+  tags:
+  - Identity Federation
+  - SAML
+  - Shibboleth
+  - InCommon
+  - SSO
+  - Identity
+  properties:
+  - type: Documentation
+    url: https://its.umich.edu/accounts-access/identity-access-management/
+  - type: Authentication
+    url: authentication/university-of-michigan-ann-arbor-authentication.yml
+  - type: GitHubOrganization
+    url: https://github.com/umich-iam
+  - type: CodeExamples
+    url: https://github.com/umich-iam/SSO-Examples
+- aid: university-of-michigan-ann-arbor:api-directory
+  name: U-M ITS API Directory
+  x-operator: institution
+  x-operator-evidence: >-
+    its.umich.edu and documentation.its.umich.edu are under umich.edu. Apigee X is the gateway product
+    U-M runs the directory on; the APIs, the data and the directory are U-M's.
+  description: >-
+    Enterprise API directory and gateway operated by U-M Information and Technology Services on Google
+    Apigee X (migrated from IBM API Connect v5 in 2024), exposing institutional data APIs across teaching
+    and learning, research, clinical care, public service and administration — MCommunity directory APIs,
+    Schedule of Classes, class rosters and room scheduling among them. It is closed: browsing, subscribing
+    to or calling anything in it requires a U-M uniqname and password, Duo two-factor authentication,
+    and presence on the U-M network or VPN. No anonymous probe of any endpoint was possible and no API
+    in the directory is described here. The credential shape is visible in U-M Library's own open-source
+    client, mlibrary/class_api_requester, which is constructed with an API id, an API secret, an API URL
+    and a separate token URL.
+  humanURL: https://its.umich.edu/data/data-database/api-directory
+  tags:
+  - API Directory
+  - Apigee
+  - Identity
+  - Institutional Data
+  - Gated
+  - Course Catalog
+  properties:
+  - type: Documentation
+    url: https://its.umich.edu/data/data-database/api-directory
+  - type: Documentation
+    url: https://documentation.its.umich.edu/api-directory
+  - type: GettingStarted
+    url: https://its.umich.edu/data/data-database/api-directory/getting-started
+  - type: Support
+    url: https://its.umich.edu/data/data-database/api-directory/support
+  - type: CodeExamples
+    url: https://github.com/mlibrary/class_api_requester
+- aid: university-of-michigan-ann-arbor:deep-blue-data
+  name: Deep Blue Data REST API
+  x-operator: institution
+  x-operator-evidence: >-
+    deepblue.lib.umich.edu is under umich.edu. The repository is Hyrax/Samvera software run by the University
+    of Michigan Library; the DOIs are minted under the U-M Library DataCite membership (symbol UMICH).
+  description: >-
+    Public REST API for Deep Blue Data, the University of Michigan Library's open repository for research
+    datasets produced by U-M researchers, with DataCite DOI persistent identifiers. Documented publicly
+    at deepblue.lib.umich.edu/data/rest-api. Could not be described here: every request to deepblue.lib.umich.edu
+    from an automated client — including the documentation page and /data/api/v1/works — returns a Cloudflare
+    managed challenge (HTTP 403, body "Just a moment..."). That is a limit on our probing, not a finding
+    about the API. No paths, parameters or schemas have been guessed; no OpenAPI is emitted for this surface
+    until it can actually be read.
+  humanURL: https://deepblue.lib.umich.edu/data/rest-api
+  baseURL: https://deepblue.lib.umich.edu/data
+  tags:
+  - Research Data
+  - Repository
+  - REST
+  - Open Data
+  - Library
+  - DataCite
+  properties:
+  - type: Documentation
+    url: https://deepblue.lib.umich.edu/data/rest-api
+- aid: university-of-michigan-ann-arbor:magic-bus
+  name: Magic Bus (U-M Transit) BusTime API
+  x-operator: institution
+  x-operator-evidence: >-
+    mbus.ltp.umich.edu is under umich.edu and is run by U-M Logistics, Transportation and Parking. The
+    BusTime software is Clever Devices' product; the deployment, the routes and the vehicle data are U-M's.
+    Clever Devices' generic contract is not stored here.
+  description: >-
+    Real-time campus transit API for U-M's Magic Bus service, served from a U-M host on Clever Devices
+    BusTime. Live and gated by an API access key — GET /bustime/api/v3/getroutes and /bustime/api/v3/gettime
+    both returned HTTP 200 text/xml with "<bustime-response><error><msg>No API access key supplied</msg></error></bustime-response>"
+    on 2026-08-19. No public self-service key issuance page was found. The rider-facing app at the root
+    is an Angular single-page application. One of the few genuinely small, institution-run campus-life
+    surfaces U-M has.
+  humanURL: https://mbus.ltp.umich.edu/
+  baseURL: https://mbus.ltp.umich.edu/bustime/api/v3
+  tags:
+  - Transit
+  - Campus Life
+  - Real-Time
+  - Gated
+  - BusTime
+  tags_raw:
+  - Transit
+  - Campus Life
+  - Real Time
+  - Gated
+  - BusTime
+  properties:
+  - type: Documentation
+    url: https://mbus.ltp.umich.edu/
+- aid: university-of-michigan-ann-arbor:materials-commons
+  name: Materials Commons
+  x-operator: institution
+  x-operator-evidence: >-
+    Not on umich.edu — materialscommons.org is a project domain. Institutional ownership is evidenced
+    instead: the site states it is operated as part of the PRISMS Center at the University of Michigan
+    under DOE award DE-SC0008637, its API documentation is copyright PRISMS Center, and its DOI-minting
+    repository UMICH.MC is registered under the University of Michigan Library's DataCite provider account.
+    This is a U-M research project on its own domain, not a tenancy on a vendor platform.
+  description: >-
+    Materials-science data repository for storing, sharing and publishing research datasets and workflows,
+    operated by the PRISMS Center at the University of Michigan. It advertises a CLI and an API, but the
+    only published API documentation is a Sphinx reference for the materials_commons.api Python package
+    (version 2.0b5, copyright 2021, PRISMS Center) — there is no HTTP contract, no OpenAPI and no path
+    reference. Nothing has been derived from the SDK docs, because a Python client is not a description
+    of the wire protocol.
+  humanURL: https://materialscommons.org/
+  tags:
+  - Research Data
+  - Repository
+  - Materials Science
+  - SDK
+  - DataCite
+  properties:
+  - type: Documentation
+    url: https://materials-commons.github.io/materials-commons-api/html/index.html
+  - type: Website
+    url: https://materialscommons.org/
+- aid: university-of-michigan-ann-arbor:canvas-lms
+  name: Canvas LMS (U-M tenancy on Instructure)
+  x-operator: tenant
+  x-operator-evidence: >-
+    umich.instructure.com is a U-M-specific account on Instructure's platform, not a U-M host. GET /api/v1/accounts
+    returns 401 with Canvas's own error envelope ({"status":"unauthenticated"}) and /login returns 200
+    titled "U-M Canvas Login". A nonsense tenant on the same platform (zzznotarealtenant.instructure.com)
+    returns 404, so the U-M tenancy is real and not a wildcard artefact.
+  description: >-
+    The University of Michigan's Canvas learning management system tenancy. The courses, the enrollments
+    and the data are U-M's; the API contract is Instructure's, published once for every Canvas customer,
+    and it is deliberately NOT stored in this repo. This entry records the relationship — which is a real
+    institutional fact and one of U-M's few programmable surfaces — without crediting U-M with Instructure's
+    engineering. Score the contract against Instructure.
+  humanURL: https://umich.instructure.com/login
+  baseURL: https://umich.instructure.com/api/v1
+  tags:
+  - LMS
+  - Canvas
+  - Tenant
+  - Teaching and Learning
+  - Vendor Platform
+  properties:
+  - type: Documentation
+    url: https://umich.instructure.com/login
+- aid: university-of-michigan-ann-arbor:university-of-michigan-ann-arbor-repository-api
+  name: University of Michigan-Ann Arbor Repository API
+  description: Repository-level description and capability discovery.
+  humanURL: https://www.lib.umich.edu/collections/deep-blue-repositories
+  baseURL: https://backend.production.deepblue-documents.lib.umich.edu/server/oai/request
+  tags:
+  - Repository
+  properties:
+  - type: OpenAPI
+    url: openapi/university-of-michigan-ann-arbor-repository-api-openapi.yml
+  - type: Documentation
+    url: https://www.lib.umich.edu/collections/deep-blue-repositories
+  - type: JSONSchema
+    url: json-schema/university-of-michigan-ann-arbor-oai-pmh-schema.json
+  - type: Examples
+    url: examples/deep-blue-documents-oai-identify.xml
+  - type: Vocabulary
+    url: vocabulary/university-of-michigan-ann-arbor-vocabulary.yml
+  - type: ErrorCodes
+    url: errors/university-of-michigan-ann-arbor-errors.yml
+  - type: Rules
+    url: rules/university-of-michigan-ann-arbor-rules.yml
 common:
   - type: Website
     url: https://umich.edu
