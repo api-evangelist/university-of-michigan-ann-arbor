@@ -1,0 +1,73 @@
+---
+name: University of Michigan-Ann Arbor — Authentication
+generated: '2026-08-19'
+method: probed
+source: >-
+  Live probes 2026-08-19 of shibboleth.umich.edu, weblogin.umich.edu, mdq.incommon.org,
+  backend.production.deepblue-documents.lib.umich.edu and mbus.ltp.umich.edu, plus the
+  published ITS API Directory getting-started documentation.
+note: >-
+  U-M's authentication story is two entirely separate things, and conflating them is the easy
+  mistake. The institution operates a full federated identity provider — that is real,
+  machine-readable, institution-run infrastructure. It does NOT operate a public developer
+  authentication surface: the enterprise API estate is closed to anyone without a U-M account.
+surfaces:
+  - surface: Deep Blue Documents OAI-PMH
+    operator: institution
+    scheme: none
+    description: >-
+      Unauthenticated and open. No API key, no bearer token, no registration. All six OAI-PMH
+      verbs answered anonymously with HTTP 200 on 2026-08-19.
+    evidence: 'GET .../server/oai/request?verb=Identify -> 200 text/xml, no credential supplied'
+  - surface: U-M ITS API Directory (Apigee X)
+    operator: institution
+    scheme: sso-gated
+    description: >-
+      Sign-in with a U-M uniqname and password, Duo two-factor authentication, and presence on
+      the U-M network or VPN are all required to browse, subscribe to, or consume any API in
+      the directory. Consumers then hold an API key/secret pair and exchange it for a token —
+      the shape is visible in U-M Library's own open-source client
+      (github.com/mlibrary/class_api_requester), which is constructed with an API id, an API
+      secret, an API URL and a separate token URL to call the Schedule of Classes API.
+    evidence: >-
+      https://its.umich.edu/data/data-database/api-directory/getting-started -> 403 to
+      automated agents (Cloudflare managed challenge, body "Just a moment..."); documented
+      access model corroborated by ITS documentation and by mlibrary/class_api_requester.
+    public_credential_issuance: false
+  - surface: Magic Bus (mbus.ltp.umich.edu) BusTime API
+    operator: institution
+    scheme: api-key
+    description: >-
+      Query-string API access key. No public self-service key issuance page was found.
+    evidence: >-
+      GET https://mbus.ltp.umich.edu/bustime/api/v3/getroutes -> 200 text/xml,
+      '<bustime-response><error><msg>No API access key supplied</msg></error></bustime-response>'
+identity_federation:
+  operator: institution
+  standard: SAML 2.0 / Shibboleth
+  entity_id: https://shibboleth.umich.edu/idp/shibboleth
+  metadata_url: https://shibboleth.umich.edu/idp/shibboleth
+  metadata_mirror: https://weblogin.umich.edu/idp/shibboleth
+  local_copy: authentication/university-of-michigan-ann-arbor-shibboleth-idp-metadata.xml
+  federation: InCommon
+  federation_registration_authority: https://incommon.org
+  federation_mdq: https://mdq.incommon.org/entities/https%3A%2F%2Fshibboleth.umich.edu%2Fidp%2Fshibboleth
+  scopes:
+    - umich.edu
+    - annarbor.umich.edu
+    - umd.umich.edu
+    - dearborn.umich.edu
+    - flint.umich.edu
+  display_name: University of Michigan
+  privacy_statement: https://it.umich.edu/security-privacy
+  entity_category: https://github.com/umich-iam/shibboleth-umich-federation/raw/master/category/prod.md
+  evidence: >-
+    GET https://shibboleth.umich.edu/idp/shibboleth -> 200 application/xml, 10,923 bytes;
+    GET https://mdq.incommon.org/entities/... -> 200 application/samlmetadata+xml, 9,252 bytes
+    with mdrpi:RegistrationInfo registrationAuthority="https://incommon.org".
+  note: >-
+    U-M ITS Identity and Access Management publishes working SAML and OIDC service-provider
+    integration examples publicly at github.com/umich-iam (SSO-Examples plus fifteen
+    per-framework example repositories, and iam-api-examples). That is genuine, institution-authored
+    developer material — it just documents how to federate WITH U-M, not how to consume a U-M API
+    without a U-M account.

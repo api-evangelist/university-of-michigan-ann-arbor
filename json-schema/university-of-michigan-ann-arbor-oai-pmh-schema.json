@@ -1,0 +1,136 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://raw.githubusercontent.com/api-evangelist/university-of-michigan-ann-arbor/refs/heads/main/json-schema/university-of-michigan-ann-arbor-oai-pmh-schema.json",
+  "title": "Deep Blue Documents OAI-PMH Response",
+  "description": "JSON Schema for the OAI-PMH 2.0 envelope returned by the University of Michigan Library's Deep Blue Documents repository, expressed as the JSON projection of the XML actually returned. Derived from verbatim live responses captured 2026-08-19; the wire format is text/xml.",
+  "x-provenance": {
+    "generated": "2026-08-19",
+    "method": "derived",
+    "source": "openapi/university-of-michigan-ann-arbor-deep-blue-documents-oai-pmh-openapi.yml, itself probed from https://backend.production.deepblue-documents.lib.umich.edu/server/oai/request",
+    "operator": "institution",
+    "note": "The University of Michigan does not publish a JSON Schema for this endpoint. This is API Evangelist's derivation from captured responses, not a University of Michigan artifact."
+  },
+  "type": "object",
+  "required": ["responseDate", "request"],
+  "properties": {
+    "responseDate": { "type": "string", "format": "date-time", "examples": ["2026-08-19T21:28:21Z"] },
+    "request": {
+      "type": "object",
+      "required": ["baseURL"],
+      "properties": {
+        "baseURL": { "type": "string", "format": "uri", "examples": ["https://backend.production.deepblue-documents.lib.umich.edu/server/oai/request"] },
+        "verb": { "type": "string", "enum": ["Identify", "ListMetadataFormats", "ListSets", "ListIdentifiers", "ListRecords", "GetRecord"] },
+        "identifier": { "type": "string" },
+        "metadataPrefix": { "type": "string" },
+        "set": { "type": "string" },
+        "from": { "type": "string", "format": "date-time" },
+        "until": { "type": "string", "format": "date-time" },
+        "resumptionToken": { "type": "string" }
+      }
+    },
+    "error": { "$ref": "#/$defs/error" },
+    "Identify": { "$ref": "#/$defs/identify" },
+    "ListMetadataFormats": { "type": "array", "items": { "$ref": "#/$defs/metadataFormat" } },
+    "ListSets": { "type": "array", "items": { "$ref": "#/$defs/set" } },
+    "ListIdentifiers": { "type": "array", "items": { "$ref": "#/$defs/recordHeader" } },
+    "ListRecords": { "type": "array", "items": { "$ref": "#/$defs/record" } },
+    "GetRecord": { "$ref": "#/$defs/record" },
+    "resumptionToken": { "$ref": "#/$defs/resumptionToken" }
+  },
+  "$defs": {
+    "identify": {
+      "type": "object",
+      "required": ["repositoryName", "baseURL", "protocolVersion", "adminEmail", "earliestDatestamp", "deletedRecord", "granularity"],
+      "properties": {
+        "repositoryName": { "type": "string", "const": "Deep Blue" },
+        "baseURL": { "type": "string", "format": "uri" },
+        "protocolVersion": { "type": "string", "const": "2.0" },
+        "adminEmail": { "type": "string", "format": "email", "examples": ["deepblue@umich.edu"] },
+        "earliestDatestamp": { "type": "string", "format": "date-time", "examples": ["2005-08-29T23:07:21Z"] },
+        "deletedRecord": { "type": "string", "enum": ["no", "persistent", "transient"], "examples": ["transient"] },
+        "granularity": { "type": "string", "examples": ["YYYY-MM-DDThh:mm:ssZ"] },
+        "oaiIdentifier": {
+          "type": "object",
+          "properties": {
+            "scheme": { "type": "string", "const": "oai" },
+            "repositoryIdentifier": { "type": "string", "const": "deepblue.lib.umich.edu" },
+            "delimiter": { "type": "string", "const": ":" },
+            "sampleIdentifier": { "type": "string", "examples": ["oai:deepblue.lib.umich.edu:2027.42/1234"] }
+          }
+        }
+      }
+    },
+    "metadataFormat": {
+      "type": "object",
+      "required": ["metadataPrefix", "schema", "metadataNamespace"],
+      "properties": {
+        "metadataPrefix": { "type": "string", "enum": ["oai_dc", "qdc", "mods", "mets", "marc", "rdf", "ore", "didl", "dim", "xoai", "etdms", "uketd_dc"] },
+        "schema": { "type": "string", "format": "uri" },
+        "metadataNamespace": { "type": "string", "format": "uri" }
+      }
+    },
+    "set": {
+      "type": "object",
+      "required": ["setSpec", "setName"],
+      "properties": {
+        "setSpec": { "type": "string", "pattern": "^(com|col)_2027\\.42_[0-9]+$", "examples": ["com_2027.42_65133"] },
+        "setName": { "type": "string", "examples": ["Archival Collections -- Bentley Library"] }
+      }
+    },
+    "recordHeader": {
+      "type": "object",
+      "required": ["identifier", "datestamp"],
+      "properties": {
+        "identifier": { "type": "string", "pattern": "^oai:deepblue\\.lib\\.umich\\.edu:2027\\.42/[0-9]+$", "examples": ["oai:deepblue.lib.umich.edu:2027.42/61022"] },
+        "datestamp": { "type": "string", "format": "date-time", "examples": ["2021-09-29T22:07:51Z"] },
+        "setSpec": { "type": "array", "items": { "type": "string" } },
+        "status": { "type": "string", "enum": ["deleted"] }
+      }
+    },
+    "record": {
+      "type": "object",
+      "required": ["header"],
+      "properties": {
+        "header": { "$ref": "#/$defs/recordHeader" },
+        "metadata": { "$ref": "#/$defs/oaiDublinCore" }
+      }
+    },
+    "oaiDublinCore": {
+      "type": "object",
+      "description": "Payload observed for metadataPrefix=oai_dc. Every Dublin Core element is repeatable, so each is modelled as an array of strings.",
+      "properties": {
+        "title": { "type": "array", "items": { "type": "string" } },
+        "creator": { "type": "array", "items": { "type": "string" } },
+        "contributor": { "type": "array", "items": { "type": "string" } },
+        "subject": { "type": "array", "items": { "type": "string" } },
+        "description": { "type": "array", "items": { "type": "string" } },
+        "publisher": { "type": "array", "items": { "type": "string" } },
+        "date": { "type": "array", "items": { "type": "string" } },
+        "type": { "type": "array", "items": { "type": "string" } },
+        "format": { "type": "array", "items": { "type": "string" } },
+        "identifier": { "type": "array", "items": { "type": "string" } },
+        "language": { "type": "array", "items": { "type": "string" } },
+        "relation": { "type": "array", "items": { "type": "string" } },
+        "rights": { "type": "array", "items": { "type": "string" } }
+      }
+    },
+    "resumptionToken": {
+      "type": "object",
+      "description": "Continuation marker on incomplete lists. Observed on ListSets as value '////100' with completeListSize 726 and cursor 0.",
+      "properties": {
+        "value": { "type": "string", "examples": ["////100"] },
+        "completeListSize": { "type": "integer", "examples": [726] },
+        "cursor": { "type": "integer", "examples": [0] },
+        "expirationDate": { "type": "string", "format": "date-time" }
+      }
+    },
+    "error": {
+      "type": "object",
+      "required": ["code"],
+      "properties": {
+        "code": { "type": "string", "enum": ["badVerb", "badArgument", "cannotDisseminateFormat", "idDoesNotExist", "badResumptionToken", "noRecordsMatch", "noMetadataFormats", "noSetHierarchy"] },
+        "message": { "type": "string" }
+      }
+    }
+  }
+}

@@ -1,0 +1,93 @@
+---
+name: University of Michigan-Ann Arbor — Deep Blue Harvesting Vocabulary
+generated: '2026-08-19'
+method: probed
+source: >-
+  https://backend.production.deepblue-documents.lib.umich.edu/server/oai/request
+  (?verb=Identify, ?verb=ListMetadataFormats, ?verb=ListSets), probed 2026-08-19
+operator: institution
+note: >-
+  Every term below was read out of a live response from the University of Michigan host. None
+  of it is inferred from the OAI-PMH specification or from DSpace defaults.
+verbs:
+  - Identify
+  - ListMetadataFormats
+  - ListSets
+  - ListIdentifiers
+  - ListRecords
+  - GetRecord
+metadata_prefixes:
+  - prefix: oai_dc
+    namespace: http://www.openarchives.org/OAI/2.0/oai_dc/
+    schema: http://www.openarchives.org/OAI/2.0/oai_dc.xsd
+    note: Unqualified Dublin Core. The default and the format used for the captured examples.
+  - prefix: qdc
+    namespace: http://purl.org/dc/terms/
+    schema: http://dublincore.org/schemas/xmls/qdc/2006/01/06/dcterms.xsd
+    note: Qualified Dublin Core (DCMI Terms).
+  - prefix: mods
+    namespace: http://www.loc.gov/mods/v3
+    schema: http://www.loc.gov/standards/mods/v3/mods-3-1.xsd
+    note: Library of Congress MODS 3.1.
+  - prefix: mets
+    namespace: http://www.loc.gov/METS/
+    schema: http://www.loc.gov/standards/mets/mets.xsd
+    note: METS packaging.
+  - prefix: marc
+    namespace: http://www.loc.gov/MARC21/slim
+    schema: http://www.loc.gov/standards/marcxml/schema/MARC21slim.xsd
+    note: MARCXML.
+  - prefix: rdf
+    namespace: http://www.openarchives.org/OAI/2.0/rdf/
+    schema: http://www.openarchives.org/OAI/2.0/rdf.xsd
+  - prefix: ore
+    namespace: http://www.w3.org/2005/Atom
+    schema: http://tweety.lanl.gov/public/schemas/2008-06/atom-tron.sch
+    note: OAI-ORE resource maps as Atom.
+  - prefix: didl
+    namespace: urn:mpeg:mpeg21:2002:02-DIDL-NS
+    schema: http://standards.iso.org/ittf/PubliclyAvailableStandards/MPEG-21_schema_files/did/didl.xsd
+  - prefix: dim
+    namespace: http://www.dspace.org/xmlns/dspace/dim
+    schema: http://www.dspace.org/schema/dim.xsd
+    note: DSpace Intermediate Metadata — the native internal format; confirms the DSpace backend.
+  - prefix: xoai
+    namespace: http://www.lyncode.com/xoai
+    schema: http://www.lyncode.com/schemas/xoai.xsd
+    note: Lyncode XOAI, the DSpace OAI data provider's own format.
+  - prefix: etdms
+    namespace: http://www.ndltd.org/standards/metadata/etdms/1.0/
+    schema: http://www.ndltd.org/standards/metadata/etdms/1.0/etdms.xsd
+    note: NDLTD electronic theses and dissertations metadata — Deep Blue holds U-M dissertations.
+  - prefix: uketd_dc
+    namespace: http://naca.central.cranfield.ac.uk/ethos-oai/2.0/
+    schema: http://naca.central.cranfield.ac.uk/ethos-oai/2.0/uketd_dc.xsd
+    note: UK EThOS thesis profile, carried by the DSpace distribution.
+identifier_scheme:
+  scheme: oai
+  repository_identifier: deepblue.lib.umich.edu
+  delimiter: ':'
+  sample: oai:deepblue.lib.umich.edu:2027.42/1234
+  handle_prefix: '2027.42'
+  note: >-
+    The local part of every OAI identifier is a Handle System handle under the University of
+    Michigan's 2027.42 prefix.
+set_hierarchy:
+  complete_list_size: 726
+  patterns:
+    - spec: com_2027.42_<handle-suffix>
+      meaning: DSpace community
+      examples:
+        - com_2027.42_65133 — Archival Collections -- Bentley Library
+        - com_2027.42_13913 — Research Collections
+        - com_2027.42_201830 — Surveys of Consumers
+    - spec: col_2027.42_<handle-suffix>
+      meaning: DSpace collection
+      examples:
+        - col_2027.42_98957 — Board of Regents (University of Michigan) Records
+        - col_2027.42_58060 — Business, Stephen M. Ross School of
+        - col_2027.42_150194 — Academic Innovation, Center for (AI)
+temporal:
+  granularity: YYYY-MM-DDThh:mm:ssZ
+  earliest_datestamp: '2005-08-29T23:07:21Z'
+  deleted_record_policy: transient

@@ -1,0 +1,180 @@
+# API Evangelist — University of Michigan-Ann Arbor governance ruleset
+# generated: '2026-08-19'
+# method: generated
+# source: >-
+#   Written by API Evangelist against the one institution-operated U-M contract in this repo,
+#   openapi/university-of-michigan-ann-arbor-deep-blue-documents-oai-pmh-openapi.yml. The
+#   University of Michigan does not publish an API governance ruleset; this is not a U-M artifact.
+# operator: institution
+# note: >-
+#   Spectral ruleset. Built-in functions only (truthy, defined, pattern, casing, schema,
+#   undefined) — no custom JS — so it runs anywhere Spectral runs. It encodes the four things
+#   that actually matter for a harvesting surface of this shape: the operator must be declared,
+#   provenance must be declared, the 200-carries-errors hazard must be documented, and the
+#   metadata vocabulary must stay pinned to what the endpoint really advertises.
+extends: [[spectral:oas, recommended]]
+rules:
+  umich-operator-declared:
+    description: Every U-M contract must declare who operates the thing it describes.
+    message: 'Root x-operator is required (institution | tenant | vendor | placeholder).'
+    severity: error
+    given: $
+    then:
+      field: x-operator
+      function: truthy
+
+  umich-operator-is-institution:
+    description: >-
+      Only institution-operated contracts belong in this repo. A tenant relationship is
+      recorded in apis.yml, not saved here; a vendor contract is not saved at all.
+    message: 'x-operator must be "institution" for a contract stored under this institution.'
+    severity: error
+    given: $.x-operator
+    then:
+      function: pattern
+      functionOptions:
+        match: '^institution$'
+
+  umich-provenance-block-present:
+    description: >-
+      An unmarked artifact is credited to the institution as though they published it. Every
+      contract must carry x-provenance with generated, method and source.
+    message: 'x-provenance.{{property}} is required.'
+    severity: error
+    given: $
+    then:
+      - field: x-provenance.generated
+        function: truthy
+      - field: x-provenance.method
+        function: truthy
+      - field: x-provenance.source
+        function: truthy
+
+  umich-provenance-method-vocabulary:
+    description: Provenance method must come from the controlled vocabulary.
+    message: 'x-provenance.method must be one of searched|generated|derived|probed|none.'
+    severity: error
+    given: $.x-provenance.method
+    then:
+      function: pattern
+      functionOptions:
+        match: '^(searched|generated|derived|probed|none)$'
+
+  umich-description-states-non-publication:
+    description: >-
+      Where API Evangelist wrote the contract rather than the institution, the description must
+      say so in the document itself, not only in a sidecar.
+    message: 'info.description must state that the University of Michigan does not publish this description.'
+    severity: warn
+    given: $.info.description
+    then:
+      function: pattern
+      functionOptions:
+        match: 'does not publish'
+
+  umich-server-on-institution-domain:
+    description: >-
+      The whole point of the operator axis. A contract stored under this institution must have
+      every server under umich.edu.
+    message: 'servers[].url must be under umich.edu — a non-umich.edu host is a tenant or vendor surface.'
+    severity: error
+    given: $.servers[*].url
+    then:
+      function: pattern
+      functionOptions:
+        match: '^https://[a-z0-9.-]*umich\.edu(/|$)'
+
+  umich-servers-https-only:
+    description: Harvesting endpoints must be reachable over TLS.
+    message: 'Server URL must use https.'
+    severity: error
+    given: $.servers[*].url
+    then:
+      function: pattern
+      functionOptions:
+        match: '^https://'
+
+  umich-contact-declared:
+    description: A harvesting surface must name a contactable operator.
+    message: 'info.contact.email is required so harvesters can reach the repository administrator.'
+    severity: error
+    given: $.info
+    then:
+      field: contact.email
+      function: truthy
+
+  umich-error-transport-documented:
+    description: >-
+      This endpoint returns HTTP 200 for protocol errors. A client that branches on status code
+      alone will treat every failure as a success, so the contract must warn about it in prose.
+    message: 'info.description must document that protocol errors are returned with HTTP 200.'
+    severity: error
+    given: $.info.description
+    then:
+      function: pattern
+      functionOptions:
+        match: 'HTTP `200`'
+
+  umich-metadata-prefix-enum-pinned:
+    description: >-
+      The metadataPrefix enum must stay pinned to the twelve prefixes ListMetadataFormats
+      actually advertises. Drift here is how a probed contract quietly becomes a guessed one.
+    message: 'metadataPrefix parameter must carry an explicit enum of the advertised prefixes.'
+    severity: error
+    given: $.paths[*][*].parameters[?(@.name == 'metadataPrefix')]
+    then:
+      field: schema.enum
+      function: truthy
+
+  umich-verb-enum-pinned:
+    description: The verb enum must list only the OAI-PMH verbs proven live against this host.
+    message: 'verb parameter must carry an explicit enum.'
+    severity: error
+    given: $.paths[*][*].parameters[?(@.name == 'verb')]
+    then:
+      field: schema.enum
+      function: truthy
+
+  umich-operation-id-camel-case:
+    description: Operation ids are consumed by generated clients and must be stable and camelCase.
+    message: 'operationId must be camelCase.'
+    severity: warn
+    given: $.paths[*][*].operationId
+    then:
+      function: casing
+      functionOptions:
+        type: camel
+
+  umich-no-placeholder-host:
+    description: >-
+      Placeholder and non-production hosts were 64 of the surfaces in the June 2026 university
+      cohort. They are never a surface.
+    message: 'Server URL must not be a placeholder, localhost, staging or example host.'
+    severity: error
+    given: $.servers[*].url
+    then:
+      function: pattern
+      functionOptions:
+        notMatch: '(example\.(com|org|domain)|localhost|127\.0\.0\.1|staging|\.ninja|your-domain)'
+
+  umich-response-example-is-real-capture:
+    description: >-
+      Examples on this contract must be externalValue references to the verbatim captures in
+      examples/, never hand-written payloads.
+    message: 'Response examples must reference a captured file via externalValue.'
+    severity: warn
+    given: $.paths[*][*].responses[*].content[*].examples[*]
+    then:
+      field: externalValue
+      function: truthy
+
+  umich-security-explicitly-empty-or-declared:
+    description: >-
+      Access posture must be stated. This endpoint is unauthenticated by protocol design, which
+      must be declared as `security: []` rather than left absent.
+    message: 'Root security must be present — use an empty array to declare an open endpoint.'
+    severity: error
+    given: $
+    then:
+      field: security
+      function: defined

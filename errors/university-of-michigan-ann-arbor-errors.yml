@@ -1,0 +1,68 @@
+---
+name: University of Michigan-Ann Arbor — Error Semantics
+generated: '2026-08-19'
+method: probed
+source: >-
+  Deliberate malformed requests against
+  https://backend.production.deepblue-documents.lib.umich.edu/server/oai/request, 2026-08-19.
+  Verbatim responses in examples/deep-blue-documents-oai-errors.xml.
+operator: institution
+transport:
+  status_code_carries_error: false
+  note: >-
+    The single most important integration fact about this API: EVERY protocol error is returned
+    with HTTP 200 and content-type text/xml. All four error probes below returned 200. A client
+    that branches on status code alone will treat every failure as a success. The error is
+    carried in an <error code="..."> element inside the OAI-PMH envelope and the body must be
+    parsed.
+  content_type: text/xml;charset=UTF-8
+  format: OAI-PMH 2.0 envelope with an <error code="..."> child
+  rfc9457_problem_details: false
+errors:
+  - code: badVerb
+    http_status: 200
+    trigger: '?verb=Nope'
+    observed: true
+    response_bytes: 508
+    description: The verb argument is missing, repeated, or not a legal OAI-PMH verb.
+  - code: badArgument
+    http_status: 200
+    trigger: '?verb=GetRecord (identifier and metadataPrefix both omitted)'
+    observed: true
+    response_bytes: 581
+    description: A required argument is missing, an argument is repeated, or an argument is unknown.
+  - code: cannotDisseminateFormat
+    http_status: 200
+    trigger: '?verb=GetRecord&identifier=oai:deepblue.lib.umich.edu:2027.42/61022&metadataPrefix=bogus'
+    observed: true
+    response_bytes: 629
+    description: >-
+      The metadataPrefix is not supported by the item or by the repository. The twelve accepted
+      prefixes are listed in vocabulary/university-of-michigan-ann-arbor-vocabulary.yml.
+  - code: idDoesNotExist
+    http_status: 200
+    trigger: '?verb=GetRecord&identifier=oai:deepblue.lib.umich.edu:2027.42/000000&metadataPrefix=oai_dc'
+    observed: true
+    response_bytes: 626
+    description: The identifier is unknown or illegal in this repository.
+  - code: badResumptionToken
+    http_status: 200
+    observed: false
+    description: >-
+      Defined by OAI-PMH 2.0 for expired or invalid resumption tokens. Not reproduced against
+      this host — recorded as protocol-defined, not as measured behaviour.
+  - code: noRecordsMatch
+    http_status: 200
+    observed: false
+    description: Defined by OAI-PMH 2.0 for empty result sets. Not reproduced against this host.
+  - code: noSetHierarchy
+    http_status: 200
+    observed: false
+    description: >-
+      Defined by OAI-PMH 2.0. Cannot occur here — this repository does advertise a set
+      hierarchy of 726 sets.
+retry_guidance:
+  documented_by_provider: false
+  note: >-
+    No retry, backoff or rate-limit guidance is published for this endpoint. No Retry-After,
+    RateLimit-* or X-RateLimit-* headers were observed on any response.
