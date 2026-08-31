@@ -345,8 +345,6 @@ common:
     url: review.yml
   - type: JSONLD
     url: json-ld/university-of-michigan-ann-arbor-context.jsonld
-  - type: Blog
-    url: blogs/blogs.json
 x-coverage:
   state: gated
   reason: institution_api_estate_behind_sso
