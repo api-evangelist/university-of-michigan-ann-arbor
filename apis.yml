@@ -229,6 +229,12 @@ apis:
   tags:
   - LMS
   - Canvas
+  - Tenants
+  - Teaching and Learning
+  - Vendor Platform
+  tags_raw:
+  - LMS
+  - Canvas
   - Tenant
   - Teaching and Learning
   - Vendor Platform
