@@ -1,0 +1,21 @@
+{
+  "provider": "university-of-michigan-ann-arbor",
+  "sources": [
+    "_original/university-of-michigan-ann-arbor-deep-blue-documents-oai-pmh-openapi.yml"
+  ],
+  "outputs": [
+    "university-of-michigan-ann-arbor-repository-api-openapi.yml"
+  ],
+  "archived": [],
+  "errors": [],
+  "warnings": [],
+  "notes": [
+    "sourced from openapi/_original/ (1 archived document(s)); previously refined output at the top level was skipped rather than re-split",
+    "university-of-michigan-ann-arbor-deep-blue-documents-oai-pmh-openapi.yml: upgraded openapi 3.1.0 -> OpenAPI 3.2.0",
+    "university-of-michigan-ann-arbor-deep-blue-documents-oai-pmh-openapi.yml: multi-axis tagging (2 tags, 1 first tags, 2.00x duplication over 1 operations) \u2014 split on first tag, 1 operations narrowed",
+    "apis.yml register: already-registered"
+  ],
+  "skipped": [
+    "university-of-michigan-ann-arbor-repository-api-openapi.yml: previously refined output, superseded by openapi/_original/"
+  ]
+}

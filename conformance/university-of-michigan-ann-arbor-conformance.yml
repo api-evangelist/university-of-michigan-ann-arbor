@@ -1,0 +1,107 @@
+---
+name: University of Michigan-Ann Arbor — Standards Conformance
+generated: '2026-08-19'
+method: probed
+source: >-
+  Live probes of University of Michigan hosts and of the external registries that hold U-M's
+  machine-readable membership records, 2026-08-19. Every entry below cites a URL that was
+  fetched and a status code that was observed.
+regime: education
+note: >-
+  Scored against the Kin Score `education` regime standards list (scim, lti, oneroster, ed-fi,
+  caliper, qti, oai-pmh, shibboleth, saml, orcid, datacite, crossref). Reward-only: a standard
+  is marked conforms:true ONLY where a machine-readable artifact was retrieved and read. U-M
+  runs Canvas (LTI) and a Workday/PeopleSoft administrative stack (SCIM-adjacent), but no LTI,
+  SCIM, OneRoster, Ed-Fi, Caliper or QTI contract or configuration document was retrievable on
+  any public U-M host, so those are recorded false rather than assumed from the vendor stack.
+standards:
+  - id: oai-pmh
+    conforms: true
+    operator: institution
+    evidence: >-
+      OAI-PMH 2.0 confirmed live on a U-M host. GET
+      https://backend.production.deepblue-documents.lib.umich.edu/server/oai/request?verb=Identify
+      -> 200 text/xml, protocolVersion 2.0, repositoryName "Deep Blue", repositoryIdentifier
+      "deepblue.lib.umich.edu", adminEmail deepblue@umich.edu, earliestDatestamp
+      2005-08-29T23:07:21Z, granularity YYYY-MM-DDThh:mm:ssZ, deletedRecord transient. All six
+      verbs returned 200 (Identify, ListMetadataFormats, ListSets, ListIdentifiers, ListRecords,
+      GetRecord); ListSets reports completeListSize 726; ListMetadataFormats advertises twelve
+      prefixes. Captures in examples/, described in
+      openapi/university-of-michigan-ann-arbor-deep-blue-documents-oai-pmh-openapi.yml.
+  - id: shibboleth
+    conforms: true
+    operator: institution
+    evidence: >-
+      U-M operates its own Shibboleth Identity Provider. GET
+      https://shibboleth.umich.edu/idp/shibboleth -> 200 application/xml;charset=UTF-8, 10,923
+      bytes. Document carries the Shibboleth-specific metadata extension
+      xmlns:shibmd="urn:mace:shibboleth:metadata:1.0" with shibmd:Scope entries for umich.edu,
+      annarbor.umich.edu, umd.umich.edu, dearborn.umich.edu and flint.umich.edu. Same document
+      served at https://weblogin.umich.edu/idp/shibboleth (200, identical byte count). Saved
+      verbatim at authentication/university-of-michigan-ann-arbor-shibboleth-idp-metadata.xml.
+  - id: saml
+    conforms: true
+    operator: institution
+    evidence: >-
+      SAML 2.0 metadata. The same document is a
+      urn:oasis:names:tc:SAML:2.0:metadata EntityDescriptor with
+      entityID="https://shibboleth.umich.edu/idp/shibboleth" and an IDPSSODescriptor with
+      protocolSupportEnumeration="urn:oasis:names:tc:SAML:2.0:protocol", signing and encryption
+      KeyDescriptors, and SingleSignOnService / SingleLogoutService endpoints. Registration
+      independently confirmed through the InCommon metadata query service: GET
+      https://mdq.incommon.org/entities/https%3A%2F%2Fshibboleth.umich.edu%2Fidp%2Fshibboleth
+      -> 200 application/samlmetadata+xml, 9,252 bytes, carrying
+      mdrpi:RegistrationInfo registrationAuthority="https://incommon.org".
+  - id: datacite
+    conforms: true
+    operator: institution
+    evidence: >-
+      University of Michigan Library is a DataCite direct member. GET
+      https://api.datacite.org/providers/umich -> 200 application/vnd.api+json; symbol UMICH,
+      name "University of Michigan Library", memberType direct_member, created 2018-11-21,
+      rorId https://ror.org/00jmfr291. Five repositories are registered under it — UMICH.LIBRARY,
+      UMICH.IRIS (Institute for Research on Innovation & Science), UMICH.MC (Materials Commons),
+      UMICH.KPMP (Kidney Precision Medicine Project) and UMICH.RSCLID (Remote Sensing Code
+      Library) — via https://api.datacite.org/clients?provider-id=umich -> 200, total 5.
+      Registry record, not a contract U-M itself publishes.
+  - id: crossref
+    conforms: true
+    operator: institution
+    evidence: >-
+      University of Michigan Library is Crossref member 2393 with DOI prefix 10.3998
+      (Michigan Publishing). GET https://api.crossref.org/members?query=university+of+michigan
+      -> 200 application/json. University of Michigan Law Library is separately member 22573
+      with ten prefixes (10.36635 / 10.36639-10.36646 / 10.61575). Registry record, not a
+      contract U-M itself publishes.
+  - id: orcid
+    conforms: false
+    evidence: >-
+      No ORCID integration was retrievable from any public U-M machine-readable surface. The
+      Deep Blue OAI-PMH oai_dc records carry dc:creator as plain-text names with no ORCID iD in
+      dc:identifier or dc:creator; no ORCID member API configuration or claim was found on a
+      readable U-M host. Not asserted.
+  - id: lti
+    conforms: false
+    evidence: >-
+      U-M runs Canvas, which is LTI-capable, but Canvas at U-M is a vendor tenancy and no LTI
+      tool configuration, LTI Advantage registration or platform configuration document was
+      retrievable on a public U-M host. Not creditable to the institution.
+  - id: scim
+    conforms: false
+    evidence: >-
+      No SCIM service provider configuration document was reachable. The MCommunity directory
+      APIs sit behind the ITS API Directory (Apigee X), which requires a U-M uniqname, Duo
+      two-factor and campus network/VPN — no anonymous probe of a /ServiceProviderConfig
+      endpoint was possible.
+  - id: oneroster
+    conforms: false
+    evidence: No OneRoster endpoint or conformance claim found on any public U-M host.
+  - id: ed-fi
+    conforms: false
+    evidence: No Ed-Fi ODS/API surface found. Ed-Fi is a K-12 standard; not expected here.
+  - id: caliper
+    conforms: false
+    evidence: No Caliper Analytics event store or sensor configuration found on a public U-M host.
+  - id: qti
+    conforms: false
+    evidence: No QTI assessment content or QTI-conformant service found on a public U-M host.

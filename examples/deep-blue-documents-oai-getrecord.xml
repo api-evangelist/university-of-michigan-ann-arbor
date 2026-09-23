@@ -1,0 +1,81 @@
+<?xml version="1.0" encoding="UTF-8"?><?xml-stylesheet type="text/xsl" href="static/style.xsl"?><OAI-PMH xmlns="http://www.openarchives.org/OAI/2.0/" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://www.openarchives.org/OAI/2.0/ http://www.openarchives.org/OAI/2.0/OAI-PMH.xsd"><responseDate>2026-08-19T21:28:21Z</responseDate><request verb="GetRecord" identifier="oai:deepblue.lib.umich.edu:2027.42/61022" metadataPrefix="oai_dc">https://backend.production.deepblue-documents.lib.umich.edu/server/oai/request</request><GetRecord><record><header><identifier>oai:deepblue.lib.umich.edu:2027.42/61022</identifier><datestamp>2021-09-29T22:07:51Z</datestamp><setSpec>com_2027.42_65133</setSpec><setSpec>col_2027.42_61002</setSpec></header><metadata><oai_dc:dc xmlns:oai_dc="http://www.openarchives.org/OAI/2.0/oai_dc/" xmlns:dc="http://purl.org/dc/elements/1.1/" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:doc="http://www.lyncode.com/xoai" xsi:schemaLocation="http://www.openarchives.org/OAI/2.0/oai_dc/ http://www.openarchives.org/OAI/2.0/oai_dc.xsd">
+   <dc:title>Michigan Today (Vol. 19 No. 02)</dc:title>
+   <dc:title>Medieval painting St. Catherine of Alexandria (image)</dc:title>
+   <dc:title>Medieval painting, the coronation of the virgin (image)</dc:title>
+   <dc:title>The power of chastity: The story of Christina of Markyate, a medieval English Noblewoman</dc:title>
+   <dc:title>Medieval painting, reversing God's curse in the Garden of Eden (image)</dc:title>
+   <dc:title>Medieval painting, St. Barbara (image)</dc:title>
+   <dc:title>Anchoress, Hartlip, England (image)</dc:title>
+   <dc:title>Medieval painting, Bishop sealed in anchoress (image)</dc:title>
+   <dc:title>Julian of Norwich</dc:title>
+   <dc:title>Medieval sketch, domestic violence (image)</dc:title>
+   <dc:title>The origins of anchoritism</dc:title>
+   <dc:title>Scenes from under a real trouper: Linda Spriggs</dc:title>
+   <dc:title>Linda Sprigs (image)</dc:title>
+   <dc:title>The bodhai tree, dance (image)</dc:title>
+   <dc:title>America's: Social psychologist Elizabeth Douvan discusses the family, the sexes and child development</dc:title>
+   <dc:title>Elizabeth Douvan (image)</dc:title>
+   <dc:title>Psyche</dc:title>
+   <dc:title>Margaret Bourke-White: How a U-M yearbook photographer became - The portrayer of this age</dc:title>
+   <dc:title>Fort Peck Dam (image)</dc:title>
+   <dc:title>Margaret Bourke-White (image)</dc:title>
+   <dc:title>The tap room, Michigan Union (image)</dc:title>
+   <dc:title>Margaret Bourke-White on gargoyle, Chrysler Building (image)</dc:title>
+   <dc:title>Files of history for the world to see</dc:title>
+   <dc:title>Nim Churl and mother, 1952 (image)</dc:title>
+   <dc:title>Tractor factory in Stalingrad, Soviet Union, 1930 (image)</dc:title>
+   <dc:title>Buchenwald, Germany, 1945 (image)</dc:title>
+   <dc:title>South African goldminers, 1950 (image)</dc:title>
+   <dc:title>Indian refugees, 1947 (image)</dc:title>
+   <dc:title>A farmer in Annelly, Kansas, 1941 (image)</dc:title>
+   <dc:title>Homeopathic Hospital (image)</dc:title>
+   <dc:title>Upjohns' gift to aid fight against cancer</dc:title>
+   <dc:title>A class act</dc:title>
+   <dc:title>Love Barnett Upjohn, Dr. E. Gifford Upjohn (image)</dc:title>
+   <dc:title>Maddie Nichols, Andy Rubinson, Ken Higgins (image)</dc:title>
+   <dc:title>Rosenthal Challenge aids book preservation</dc:title>
+   <dc:title>Campaign work on west coast in high gear</dc:title>
+   <dc:title>Cheryl Dawdy (image)</dc:title>
+   <dc:title>Hominids' teeth stir debate</dc:title>
+   <dc:title>B. Holly Smith, Hominid skull (image)</dc:title>
+   <dc:title>Sarah G. Power, U-M Regent, Dies</dc:title>
+   <dc:title>Sarah Goddard Power (image)</dc:title>
+   <dc:title>Spring break in Appalachia</dc:title>
+   <dc:title>Abandoned store in Appalachia (image)</dc:title>
+   <dc:title>Shana Milkie, Clare Snook, Anne Mullen (image)</dc:title>
+   <dc:title>Theatre Department revives Lerner-Weil show</dc:title>
+   <dc:title>Lys Symonette, Kirsten Cooke (image)</dc:title>
+   <dc:title>It was a bad year for a straight shooter</dc:title>
+   <dc:title>Nancy Cantor (image)</dc:title>
+   <dc:title>Jennifer A. Kitchell (image)</dc:title>
+   <dc:title>Barbara Boardman Smuts (image)</dc:title>
+   <dc:title>Lorea Feldman (image)</dc:title>
+   <dc:title>Museum of Art auction</dc:title>
+   <dc:title/>
+   <dc:creator>Kalmbach, Bob</dc:creator>
+   <dc:creator>Dutton, Marsha</dc:creator>
+   <dc:creator>Rudnicki, Marianne Danks</dc:creator>
+   <dc:creator>Rosu, Dona</dc:creator>
+   <dc:creator>Gilbert, Deborah A.</dc:creator>
+   <dc:creator>Rice, Don</dc:creator>
+   <dc:creator>Yates, Peter</dc:creator>
+   <dc:creator>Blanchard, Frank</dc:creator>
+   <dc:creator>Snook, Clare</dc:creator>
+   <dc:creator>Breiter, Marilyn Saulles</dc:creator>
+   <dc:creator>Ramljak, Suzanne</dc:creator>
+   <dc:creator>Gallagher, Terry</dc:creator>
+   <dc:contributor>John Woodford, Executive Editor</dc:contributor>
+   <dc:description>http://deepblue.lib.umich.edu/bitstream/2027.42/61022/1/1902.pdf</dc:description>
+   <dc:date>2008-10-06T19:16:36Z</dc:date>
+   <dc:date>2008-10-06T19:16:36Z</dc:date>
+   <dc:date>1987-04</dc:date>
+   <dc:type>Article</dc:type>
+   <dc:identifier>https://hdl.handle.net/2027.42/61022</dc:identifier>
+   <dc:language>en_US</dc:language>
+   <dc:format>114050947 bytes</dc:format>
+   <dc:format>18 bytes</dc:format>
+   <dc:format>application/pdf</dc:format>
+   <dc:format>text/plain</dc:format>
+   <dc:format>application/pdf</dc:format>
+   <dc:publisher>News and Information Services, The University of Michigan</dc:publisher>
+</oai_dc:dc></metadata></record></GetRecord></OAI-PMH>

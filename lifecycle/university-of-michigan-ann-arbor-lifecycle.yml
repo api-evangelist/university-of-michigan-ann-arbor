@@ -1,0 +1,48 @@
+---
+name: University of Michigan-Ann Arbor — API Lifecycle
+generated: '2026-08-19'
+method: probed
+source: Live probes of U-M hosts, 2026-08-19
+operator: institution
+summary: >-
+  No API lifecycle policy — versioning scheme, deprecation notice period, sunset commitment,
+  changelog or status page — was found for any institution-operated University of Michigan API
+  surface. This is recorded as an absence that was looked for, not as an unexamined blank.
+versioning:
+  scheme: protocol-versioned
+  detail: >-
+    The Deep Blue Documents endpoint declares protocolVersion 2.0 in its Identify response.
+    That is the OAI-PMH protocol version, not a University of Michigan API version — U-M does
+    not version this surface itself. No version is carried in the path, in a header, or in a
+    media type.
+  evidence: '<protocolVersion>2.0</protocolVersion> in the live Identify response'
+deprecation:
+  policy_published: false
+  sunset_header: false
+  deprecation_header: false
+  detail: >-
+    No RFC 8594 Sunset header and no Deprecation header were observed on any OAI-PMH response.
+    No deprecation policy document was found on a readable U-M host.
+changelog:
+  published: false
+  detail: >-
+    No changelog for any U-M API surface was found. U-M ITS publishes service news at
+    michigan.it.umich.edu — that is where the 2024 migration of the API Directory from IBM API
+    Connect v5 to Google Apigee X was announced — but it is IT service news, not an API
+    changelog, and it is not machine-readable.
+status_page:
+  published: true
+  operator: institution
+  url: https://status.its.umich.edu
+  machine_readable: false
+  detail: >-
+    U-M ITS runs a service status page. No JSON status endpoint was found and the host is
+    behind the same bot challenge as the rest of the umich.edu estate, so its availability
+    could not be verified anonymously; recorded as a claim to re-probe, not a verified pointer.
+    Not emitted as an apis.yml pointer for that reason.
+stability_signal:
+  detail: >-
+    The one hard stability signal available is the repository's own record of itself: the Deep
+    Blue OAI-PMH earliestDatestamp is 2005-08-29T23:07:21Z, so this harvesting surface has been
+    accumulating records for twenty-one years. Continuity is evidenced by operation, not by
+    policy.
