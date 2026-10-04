@@ -166,6 +166,55 @@ components:
           type: string
           format: uri
           example: http://www.openarchives.org/OAI/2.0/oai_dc/
+    Set:
+      type: object
+      required:
+      - setSpec
+      - setName
+      properties:
+        setSpec:
+          type: string
+          example: com_2027.42_65133
+        setName:
+          type: string
+          example: Archival Collections -- Bentley Library
+    OAIPMHEnvelope:
+      type: object
+      description: OAI-PMH 2.0 response envelope, namespace `http://www.openarchives.org/OAI/2.0/`. Exactly one of the verb payloads or `error` is present alongside `responseDate` and `request`.
+      required:
+      - responseDate
+      - request
+      properties:
+        responseDate:
+          type: string
+          format: date-time
+          description: UTC timestamp the response was generated.
+        request:
+          type: string
+          format: uri
+          description: Echo of the base URL, with the request arguments as XML attributes.
+        error:
+          $ref: '#/components/schemas/OAIError'
+        Identify:
+          $ref: '#/components/schemas/Identify'
+        ListMetadataFormats:
+          type: array
+          items:
+            $ref: '#/components/schemas/MetadataFormat'
+        ListSets:
+          type: array
+          items:
+            $ref: '#/components/schemas/Set'
+        ListIdentifiers:
+          type: array
+          items:
+            $ref: '#/components/schemas/RecordHeader'
+        ListRecords:
+          type: array
+          items:
+            $ref: '#/components/schemas/Record'
+        GetRecord:
+          $ref: '#/components/schemas/Record'
     Identify:
       type: object
       description: Repository description. Values below are those returned live on 2026-08-19.
@@ -221,16 +270,26 @@ components:
             sampleIdentifier:
               type: string
               example: oai:deepblue.lib.umich.edu:2027.42/1234
-    Record:
+    OAIError:
       type: object
+      description: Protocol error. Carried inside a 200 response. Only the four codes below were reproduced against this host; the OAI-PMH specification defines others.
       required:
-      - header
+      - code
       properties:
-        header:
-          $ref: '#/components/schemas/RecordHeader'
-        metadata:
-          type: object
-          description: Metadata payload in the requested prefix. For `oai_dc` this is an `oai_dc:dc` element carrying repeatable Dublin Core elements (`dc:title`, `dc:creator`, `dc:subject`, `dc:date`, `dc:identifier`, `dc:type`, `dc:rights`, `dc:language`, `dc:description`).
+        code:
+          type: string
+          enum:
+          - badVerb
+          - badArgument
+          - cannotDisseminateFormat
+          - idDoesNotExist
+          - badResumptionToken
+          - noRecordsMatch
+          - noMetadataFormats
+          - noSetHierarchy
+        message:
+          type: string
+          description: Human-readable text content of the error element.
     RecordHeader:
       type: object
       required:
@@ -253,75 +312,16 @@ components:
           enum:
           - deleted
           description: Present only on deleted records. This repository reports deletions as transient.
-    OAIPMHEnvelope:
-      type: object
-      description: OAI-PMH 2.0 response envelope, namespace `http://www.openarchives.org/OAI/2.0/`. Exactly one of the verb payloads or `error` is present alongside `responseDate` and `request`.
-      required:
-      - responseDate
-      - request
-      properties:
-        responseDate:
-          type: string
-          format: date-time
-          description: UTC timestamp the response was generated.
-        request:
-          type: string
-          format: uri
-          description: Echo of the base URL, with the request arguments as XML attributes.
-        error:
-          $ref: '#/components/schemas/OAIError'
-        Identify:
-          $ref: '#/components/schemas/Identify'
-        ListMetadataFormats:
-          type: array
-          items:
-            $ref: '#/components/schemas/MetadataFormat'
-        ListSets:
-          type: array
-          items:
-            $ref: '#/components/schemas/Set'
-        ListIdentifiers:
-          type: array
-          items:
-            $ref: '#/components/schemas/RecordHeader'
-        ListRecords:
-          type: array
-          items:
-            $ref: '#/components/schemas/Record'
-        GetRecord:
-          $ref: '#/components/schemas/Record'
-    Set:
+    Record:
       type: object
       required:
-      - setSpec
-      - setName
+      - header
       properties:
-        setSpec:
-          type: string
-          example: com_2027.42_65133
-        setName:
-          type: string
-          example: Archival Collections -- Bentley Library
-    OAIError:
-      type: object
-      description: Protocol error. Carried inside a 200 response. Only the four codes below were reproduced against this host; the OAI-PMH specification defines others.
-      required:
-      - code
-      properties:
-        code:
-          type: string
-          enum:
-          - badVerb
-          - badArgument
-          - cannotDisseminateFormat
-          - idDoesNotExist
-          - badResumptionToken
-          - noRecordsMatch
-          - noMetadataFormats
-          - noSetHierarchy
-        message:
-          type: string
-          description: Human-readable text content of the error element.
+        header:
+          $ref: '#/components/schemas/RecordHeader'
+        metadata:
+          type: object
+          description: Metadata payload in the requested prefix. For `oai_dc` this is an `oai_dc:dc` element carrying repeatable Dublin Core elements (`dc:title`, `dc:creator`, `dc:subject`, `dc:date`, `dc:identifier`, `dc:type`, `dc:rights`, `dc:language`, `dc:description`).
 x-operator: institution
 x-operator-evidence: Host backend.production.deepblue-documents.lib.umich.edu is under umich.edu. Identify returns repositoryName "Deep Blue", repositoryIdentifier "deepblue.lib.umich.edu", adminEmail "deepblue@umich.edu".
 x-provenance:
