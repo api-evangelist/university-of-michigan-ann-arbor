@@ -64,7 +64,7 @@ tags:
 - Library
 - Research Computing
 created: '2026-06-03'
-modified: '2026-09-16'
+modified: '2026-10-06'
 specificationVersion: '0.23'
 apis:
 - aid: university-of-michigan-ann-arbor:shibboleth-idp
@@ -264,6 +264,8 @@ apis:
   - type: Rules
     url: rules/university-of-michigan-ann-arbor-rules.yml
 common:
+- url: https://news.umich.edu/feed/
+  type: BlogRSS
 - type: Website
   url: https://umich.edu
 - type: Website
