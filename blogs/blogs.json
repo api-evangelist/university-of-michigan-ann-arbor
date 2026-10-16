@@ -2,27 +2,26 @@
   "repo": "university-of-michigan-ann-arbor",
   "feeds": [
     {
+      "source": "https://news.umich.edu/feed/",
+      "feed_url": "https://news.umich.edu/feed/",
+      "title": "",
+      "saved": 8,
+      "method": "feed"
+    },
+    {
       "source": "https://www.lib.umich.edu/about-us/news",
       "feed_url": "https://www.lib.umich.edu/about-us/news",
-      "title": "University of Michigan Library News",
+      "title": "",
       "saved": 0,
-      "method": "html-scrape",
-      "error": "parse_failed",
-      "nature": "vendor-blog",
-      "nature_basis": "path_blog"
+      "method": "none"
     },
     {
       "source": "https://its.umich.edu/news",
-      "feed_url": "https://its.umich.edu/news",
-      "title": "U-M Information and Technology Services News",
-      "saved": 0,
-      "method": "none",
-      "note": "All feed paths and HTML return HTTP 403 Forbidden",
-      "error": "fetch_failed: HTTPError"
+      "error": "HTTPError"
     }
   ],
-  "post_count": 3,
-  "fetched": "2026-10-03T12:15:37Z",
+  "post_count": 11,
+  "fetched": "2026-10-10T13:15:00Z",
   "feed_nature": "vendor-blog",
   "feed_nature_basis": "path_blog",
   "feed_nature_note": "Whether these posts are the vendor publishing or its support community, decided on the URL path grammar of the saved posts -- not the hostname, which carries both on Khoros, and not author diversity, which flags large vendor blogs as forums. 'undetermined' means undetermined."
