@@ -148,24 +148,6 @@ paths:
                   externalValue: ../examples/deep-blue-documents-oai-errors.xml
 components:
   schemas:
-    MetadataFormat:
-      type: object
-      required:
-      - metadataPrefix
-      - schema
-      - metadataNamespace
-      properties:
-        metadataPrefix:
-          type: string
-          example: oai_dc
-        schema:
-          type: string
-          format: uri
-          example: http://www.openarchives.org/OAI/2.0/oai_dc.xsd
-        metadataNamespace:
-          type: string
-          format: uri
-          example: http://www.openarchives.org/OAI/2.0/oai_dc/
     Set:
       type: object
       required:
@@ -178,6 +160,16 @@ components:
         setName:
           type: string
           example: Archival Collections -- Bentley Library
+    Record:
+      type: object
+      required:
+      - header
+      properties:
+        header:
+          $ref: '#/components/schemas/RecordHeader'
+        metadata:
+          type: object
+          description: Metadata payload in the requested prefix. For `oai_dc` this is an `oai_dc:dc` element carrying repeatable Dublin Core elements (`dc:title`, `dc:creator`, `dc:subject`, `dc:date`, `dc:identifier`, `dc:type`, `dc:rights`, `dc:language`, `dc:description`).
     OAIPMHEnvelope:
       type: object
       description: OAI-PMH 2.0 response envelope, namespace `http://www.openarchives.org/OAI/2.0/`. Exactly one of the verb payloads or `error` is present alongside `responseDate` and `request`.
@@ -215,6 +207,24 @@ components:
             $ref: '#/components/schemas/Record'
         GetRecord:
           $ref: '#/components/schemas/Record'
+    MetadataFormat:
+      type: object
+      required:
+      - metadataPrefix
+      - schema
+      - metadataNamespace
+      properties:
+        metadataPrefix:
+          type: string
+          example: oai_dc
+        schema:
+          type: string
+          format: uri
+          example: http://www.openarchives.org/OAI/2.0/oai_dc.xsd
+        metadataNamespace:
+          type: string
+          format: uri
+          example: http://www.openarchives.org/OAI/2.0/oai_dc/
     Identify:
       type: object
       description: Repository description. Values below are those returned live on 2026-08-19.
@@ -270,26 +280,6 @@ components:
             sampleIdentifier:
               type: string
               example: oai:deepblue.lib.umich.edu:2027.42/1234
-    OAIError:
-      type: object
-      description: Protocol error. Carried inside a 200 response. Only the four codes below were reproduced against this host; the OAI-PMH specification defines others.
-      required:
-      - code
-      properties:
-        code:
-          type: string
-          enum:
-          - badVerb
-          - badArgument
-          - cannotDisseminateFormat
-          - idDoesNotExist
-          - badResumptionToken
-          - noRecordsMatch
-          - noMetadataFormats
-          - noSetHierarchy
-        message:
-          type: string
-          description: Human-readable text content of the error element.
     RecordHeader:
       type: object
       required:
@@ -312,16 +302,26 @@ components:
           enum:
           - deleted
           description: Present only on deleted records. This repository reports deletions as transient.
-    Record:
+    OAIError:
       type: object
+      description: Protocol error. Carried inside a 200 response. Only the four codes below were reproduced against this host; the OAI-PMH specification defines others.
       required:
-      - header
+      - code
       properties:
-        header:
-          $ref: '#/components/schemas/RecordHeader'
-        metadata:
-          type: object
-          description: Metadata payload in the requested prefix. For `oai_dc` this is an `oai_dc:dc` element carrying repeatable Dublin Core elements (`dc:title`, `dc:creator`, `dc:subject`, `dc:date`, `dc:identifier`, `dc:type`, `dc:rights`, `dc:language`, `dc:description`).
+        code:
+          type: string
+          enum:
+          - badVerb
+          - badArgument
+          - cannotDisseminateFormat
+          - idDoesNotExist
+          - badResumptionToken
+          - noRecordsMatch
+          - noMetadataFormats
+          - noSetHierarchy
+        message:
+          type: string
+          description: Human-readable text content of the error element.
 x-operator: institution
 x-operator-evidence: Host backend.production.deepblue-documents.lib.umich.edu is under umich.edu. Identify returns repositoryName "Deep Blue", repositoryIdentifier "deepblue.lib.umich.edu", adminEmail "deepblue@umich.edu".
 x-provenance:
