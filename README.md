@@ -1,4 +1,4 @@
-# University of Michigan-Ann Arbor (university-of-michigan-ann-arbor)
+# University of Michigan-Ann Arbor
 
 <!-- API-EVANGELIST-PROVENANCE:BEGIN -->
 > ### About this repository
@@ -64,50 +64,138 @@
 > Full detail: **[Where this data comes from](https://apievangelist.com/about/where-our-data-comes-from)**
 <!-- API-EVANGELIST-PROVENANCE:END -->
 
-The University of Michigan-Ann Arbor is a public research university ranked #21 in the QS World University Rankings 2025 (United States). This repository catalogs the institution's public developer and API footprint as an [APIs.json](https://apisjson.org) provider profile. U-M's API program is led by Information and Technology Services (ITS), whose enterprise API Directory (built on Apigee X) is gated to authenticated U-M members, while the University of Michigan Library publishes public scholarly and research-data infrastructure including the Deep Blue Data REST API and a live Deep Blue Documents OAI-PMH endpoint.
+The University of Michigan-Ann Arbor is a public research university (QS World University Rankings 2025 #20-21, United States), a member of the Association of American Universities and the Big Ten Academic Alliance. Its programmable footprint is large in aggregate and almost entirely closed to the public. The enterprise estate — MCommunity directory, Schedule of Classes, class rosters, room scheduling and other institutional data — sits behind the U-M ITS API Directory on Google Apigee X, which cannot be browsed, let alone called, without a U-M uniqname, Duo two-factor authentication and presence on the U-M network or VPN. What is genuinely open and genuinely U-M's own is library and identity infrastructure: the Deep Blue Documents DSpace repository publishes a fully working OAI-PMH 2.0 harvesting endpoint on a umich.edu host (all six verbs verified live, twelve metadata formats, 726 sets, records back to 2005), and U-M ITS Identity and Access Management operates its own Shibboleth SAML 2.0 identity provider registered in InCommon, with public SAML and OIDC integration examples on GitHub. U-M Library is a DataCite direct member (symbol UMICH, five repositories) and a Crossref member (prefix 10.3998). Around those sit smaller institution-run surfaces — the Magic Bus transit API and Deep Blue Data — and one large vendor tenancy, Canvas at umich.instructure.com, whose contract belongs to Instructure and is not stored here. U-M publishes no public developer portal, no OpenAPI, no changelog and no API terms of service. Most of the umich.edu estate returns a Cloudflare bot challenge to automated clients, so several pointers below are documented-and-live rather than machine-readable.
 
-- APIs.json: https://raw.githubusercontent.com/api-evangelist/university-of-michigan-ann-arbor/refs/heads/main/apis.yml
-- Run with Naftiko: https://github.com/naftiko/fleet?utm_source=api-evangelist&utm_medium=readme&utm_campaign=university-of-michigan-ann-arbor-api-evangelist&utm_content=repo
+**Areas:** University · Higher Education · Education · Public Research University · United States · Michigan · Big Ten · Association of American Universities · Research Data · Institutional Repository · Identity Federation · OAI-PMH
 
-## Type
+## University of Michigan-Ann Arbor on APIs.io
 
-- Index / Consumer / 3rd-Party
+Everything profiled for University of Michigan-Ann Arbor is published on APIs.io rather than in this repository. Start at the provider page — **[apis.io/providers/university-of-michigan-ann-arbor/](https://apis.io/providers/university-of-michigan-ann-arbor/)** — or go straight to one of the APIs or properties below.
 
-## Tags
+### APIs (7)
 
-Education, Higher Education, University, Research, Library, Open Data, Institutional Repository, United States
+- [U-M Shibboleth Identity Provider (InCommon)](https://apis.io/apis/university-of-michigan-ann-arbor/shibboleth-idp/) — The University of Michigan's own Shibboleth SAML 2.0 identity provider, and the most unambiguously institution-operated machine-readable surface U-M…
+- [U-M ITS API Directory](https://apis.io/apis/university-of-michigan-ann-arbor/api-directory/) — Enterprise API directory and gateway operated by U-M Information and Technology Services on Google Apigee X (migrated from IBM API Connect v5 in 2024),…
+- [Deep Blue Data REST API](https://apis.io/apis/university-of-michigan-ann-arbor/deep-blue-data/) — Public REST API for Deep Blue Data, the University of Michigan Library's open repository for research datasets produced by U-M researchers, with DataCite…
+- [Magic Bus (U-M Transit) BusTime API](https://apis.io/apis/university-of-michigan-ann-arbor/magic-bus/) — Real-time campus transit API for U-M's Magic Bus service, served from a U-M host on Clever Devices BusTime. Live and gated by an API access key — GET…
+- [Materials Commons](https://apis.io/apis/university-of-michigan-ann-arbor/materials-commons/) — Materials-science data repository for storing, sharing and publishing research datasets and workflows, operated by the PRISMS Center at the University of…
+- [Canvas LMS (U-M tenancy on Instructure)](https://apis.io/apis/university-of-michigan-ann-arbor/canvas-lms/) — The University of Michigan's Canvas learning management system tenancy. The courses, the enrollments and the data are U-M's; the API contract is…
+- [University of Michigan-Ann Arbor Repository API](https://apis.io/apis/university-of-michigan-ann-arbor/university-of-michigan-ann-arbor-repository-api/) — Repository-level description and capability discovery.
 
-## APIs
+### Published properties
 
-- **U-M ITS API Directory** — Enterprise API directory and Apigee X gateway exposing institutional data APIs (teaching & learning, research, clinical care, administration). Gated: requires U-M uniqname, Duo two-factor, and U-M network/VPN. Docs: https://its.umich.edu/data/data-database/api-directory · https://documentation.its.umich.edu/api-directory
-- **Deep Blue Data REST API** — Public REST API for the U-M Library's open research-dataset repository (DOI-backed, free public access). Docs: https://deepblue.lib.umich.edu/data/rest-api
-- **Deep Blue Documents OAI-PMH** — Live DSpace OAI-PMH metadata harvesting endpoint for the U-M institutional repository. Base: https://backend.production.deepblue-documents.lib.umich.edu/server/oai/request · Docs: https://www.lib.umich.edu/collections/deep-blue-repositories
+Each property below is a page on APIs.io carrying the machine-readable artifact and what it says.
 
-## Plans / Rate Limits / FinOps
+#### JSON Schema (1)
 
-- Plans: [plans/university-of-michigan-ann-arbor-plans-pricing.yml](plans/university-of-michigan-ann-arbor-plans-pricing.yml)
-- Rate Limits: [rate-limits/university-of-michigan-ann-arbor-rate-limits.yml](rate-limits/university-of-michigan-ann-arbor-rate-limits.yml)
-- FinOps: [finops/university-of-michigan-ann-arbor-finops.yml](finops/university-of-michigan-ann-arbor-finops.yml)
+The data models the API reads and writes.
 
-## Timestamps
+- [Deep Blue Documents OAI-PMH Response](https://apis.io/schemas/university-of-michigan-ann-arbor/university-of-michigan-ann-arbor-oai-pmh/)
 
-- Created: 2026-06-03
-- Modified: 2026-06-03
+#### JSON-LD (1)
 
-## Common Properties
+Linked-data contexts for the provider's vocabulary.
 
-- Website: https://umich.edu · https://www.lib.umich.edu
-- Developer Portal: https://its.umich.edu/data/data-database/api-directory
-- GitHub: https://github.com/umich · https://github.com/mlibrary
-- LinkedIn: https://www.linkedin.com/school/university-of-michigan/
-- Authentication: https://its.umich.edu/data/data-database/api-directory/getting-started
+- [University Of Michigan Ann Arbor Context](https://apis.io/jsonld/university-of-michigan-ann-arbor/university-of-michigan-ann-arbor-context/)
 
-## Notes
+#### Governance rules (1)
 
-- The ITS API Directory is an enterprise, members-only program (uniqname + Duo + U-M network/VPN); its individual API endpoints could not be probed anonymously and none were fabricated.
-- Several umich.edu pages return HTTP 403 to automated agents (Akamai bot protection) but are real, publicly documented pages confirmed via search.
-- The Deep Blue Documents OAI-PMH endpoint was verified live (HTTP 200, valid Identify response). GitHub orgs were verified via the GitHub API.
+Spectral rulesets for the provider's contracts.
 
-## Maintainers
+- [University of Michigan-Ann Arbor API Rules](https://apis.io/rules/university-of-michigan-ann-arbor/university-of-michigan-ann-arbor-rules/)
 
-- Kin Lane — kin@apievangelist.com
+#### Security (2)
+
+Authentication, trust centre, and vulnerability disclosure.
+
+- [University Of Michigan Ann Arbor Authentication](https://apis.io/security/university-of-michigan-ann-arbor/university-of-michigan-ann-arbor-authentication/)
+- [University Of Michigan Ann Arbor Domain Security](https://apis.io/security/university-of-michigan-ann-arbor/university-of-michigan-ann-arbor-domain-security/)
+
+#### OAuth scopes (1)
+
+The permissions the API asks for.
+
+- [University Of Michigan Ann Arbor Scopes](https://apis.io/scopes/university-of-michigan-ann-arbor/university-of-michigan-ann-arbor-scopes/)
+
+#### Plans and pricing (1)
+
+Published plans, tiers and prices.
+
+- [University Of Michigan Ann Arbor Plans Pricing](https://apis.io/plans/university-of-michigan-ann-arbor/university-of-michigan-ann-arbor-plans-pricing/)
+
+#### Rate limits (1)
+
+Published request limits.
+
+- [University Of Michigan Ann Arbor Rate Limits](https://apis.io/rate-limits/university-of-michigan-ann-arbor/university-of-michigan-ann-arbor-rate-limits/)
+
+#### FinOps (1)
+
+What the API costs to run, by operation.
+
+- [University Of Michigan Ann Arbor Finops](https://apis.io/finops/university-of-michigan-ann-arbor/university-of-michigan-ann-arbor-finops/)
+
+## Where to find this API
+
+Links to the company's own pages. This repository publishes no copy of their specifications — the canonical document is theirs and lives at the URLs below.
+
+- [Website](https://umich.edu)
+- [Documentation](https://documentation.its.umich.edu/api-directory)
+- [Support](https://its.umich.edu/data/data-database/api-directory/support)
+- [Privacy policy](https://www.lib.umich.edu/about-us/policies/library-privacy-statement)
+- [GitHub](https://github.com/umich)
+
+## API Evangelist rating
+
+**Kin Score 42.3** — developing · rubric 0.25.0 · scored 2026-10-23
+
+| Facet | Score |
+|---|---|
+| Discoverability | 57.1 |
+| Contract quality | 58.2 |
+| Contract governance | 44.7 |
+| Operational transparency | 7.9 |
+| Developer ergonomics | 47.6 |
+| Access clarity | 15.8 |
+
+**Agent readiness 27.8** — agent-aware
+
+| Agent-readiness dimension | Result |
+|---|---|
+| Spec Presence | yes |
+| Agentic Access | — |
+| Reversibility Documented | na |
+| MCP Server | — |
+| Auth Clarity | bearer (partial credit) |
+| Idempotency | na |
+| Error Semantics | documented (partial credit) |
+| OpenAPI Examples | verified |
+| Rate Limit Signal | derived (partial credit) |
+| Event Surface Described | — |
+| Agent Skills | — |
+| Well Known Catalog | — |
+| Consent Identity | — |
+| Agent Card | — |
+| Dry Run Mode | na |
+| Delegated Identity | — |
+| Protected Resource Metadata | — |
+| Dynamic Client Registration | — |
+| Agentic Commerce | — |
+| Pagination Ratio | na |
+| Operation Distinctiveness | na |
+
+**Regulatory alignment 38.2** — Education & Research
+
+The rubric is published at [github.com/api-evangelist/kin-score](https://github.com/api-evangelist/kin-score). The per-check breakdown behind these numbers — which checks were earned, partial or missed — along with score history and how this provider compares to its peers, is available at [apis.io/providers/university-of-michigan-ann-arbor/](https://apis.io/providers/university-of-michigan-ann-arbor/).
+
+## How this profile is made
+
+API Evangelist profiles a company's public API surface the way a developer would find it: the website, developer portal and documentation, the specifications it publishes, its public repositories, and its pricing, status and changelog pages. From that it derives the properties above — contracts split per API, workflows, schemas, collections, governance rules, plans and rate limits — and scores them against the published [Kin Score rubric](https://github.com/api-evangelist/kin-score).
+
+The artifacts are published on [APIs.io](https://apis.io), not in this repository. This repository is the public record for University of Michigan-Ann Arbor: the place to say something is wrong, missing or out of date, and to ask for a re-score or a removal.
+
+## Open an issue
+
+- **Something about this listing** — a wrong description, a missing API, a stale artifact or a question about the rating: [open an issue on this repository](https://github.com/api-evangelist/university-of-michigan-ann-arbor/issues/new).
+- **A new API, or one that is not in the catalog yet** — [submit it on APIs.io](https://apis.io/add/).
+- **Anything else** — [the APIs.io inbox](https://github.com/api-search/inbox/issues/new) or [info@apievangelist.com](mailto:info@apievangelist.com).
